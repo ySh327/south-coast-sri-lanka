@@ -22,7 +22,6 @@
     --font-head: 'Fraunces', serif;
     --font-body: 'Work Sans', sans-serif;
   }
-  :root:not([data-theme="light"]){}
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
       --sand:#132521;
@@ -152,7 +151,7 @@
     font-size:13px; color:var(--coral); font-weight:600; margin:0 0 6px;
   }
 
-  /* ---------- Beaches ---------- */
+  /* ---------- Beaches & Image Cards ---------- */
   .beach-grid{
     display:grid; grid-template-columns:repeat(3, 1fr); gap:22px;
   }
@@ -167,11 +166,17 @@
     border:1px solid var(--line);
   }
   .beach-art{
-    height:120px;
+    height:180px;
     position:relative;
     overflow:hidden;
+    background:#11221f;
   }
-  .beach-art svg{width:100%; height:100%; display:block;}
+  .beach-art img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
   .beach-body{padding:20px 20px 22px; display:flex; flex-direction:column; gap:10px; flex:1;}
   .beach-body h3{font-family:var(--font-head); font-size:22px; margin:0; font-weight:600;}
   .tag-row{display:flex; gap:6px; flex-wrap:wrap;}
@@ -223,7 +228,7 @@
   }
   .route-opt p{margin:0; font-size:13.5px; color:rgba(244,236,216,0.78);}
 
-  /* ---------- Train timetable ---------- */
+  /* ---------- Timetables ---------- */
   .timetable-block{margin-top:40px;}
   .timetable-note{
     background:rgba(19,37,33,0.05); border:1px solid var(--line); border-radius:12px;
@@ -278,8 +283,7 @@
   }
   table.coast td{padding:10px 14px; border-bottom:1px solid var(--line); white-space:nowrap; vertical-align:middle;}
   table.coast tr:last-child td{border-bottom:none;}
-  table.coast td.hop{font-weight:600;}
-  table.coast td.offroad{font-weight:400; font-size:12px; color:var(--coral);}
+
   .coast-dir{
     display:inline-flex; align-items:center; gap:5px; font-size:12.5px; font-weight:600;
     color:var(--ocean-mid); text-decoration:none;
@@ -400,7 +404,7 @@
             <label for="destSelect">Destination beach town</label>
             <select id="destSelect"></select>
           </div>
-          <a href="#" id="directionsBtn" class="btn btn-coral" style="justify-content:center;">Open directions in Google Maps</a>
+          <a href="#" id="directionsBtn" target="_blank" rel="noopener" class="btn btn-coral" style="justify-content:center;">Open directions in Google Maps</a>
           <p class="planner-note">Road distance is roughly 150–225 km depending on the town — 3.5–4.5 hours by car via the Southern Expressway, longer by bus or train.</p>
         </div>
       </div>
@@ -494,7 +498,7 @@
         </div>
 
         <div class="coast-note">
-          <strong>How to read this:</strong> car times are via the Southern Expressway. "Bus route no." is Route 01 (Kandy → Colombo Bastian Mawatha) followed by Route 02 (Colombo → Galle/Matara) or Route 32 (Colombo → Tangalle/Dikwella) — same bus stand in Colombo, so it's a quick change rather than crossing the city. There's no single through-numbered service for this leg, so budget for two separate tickets.
+          <strong>How to read this:</strong> car times are via the Southern Expressway. "Bus route no." is Route 01 (Kandy → Colombo Bastian Mawatha) followed by Route 02 (Colombo → Galle/Matara) or Route 32 (Colombo → Tangalle/Dikwella) — same bus stand in Colombo, so it's a quick change rather than crossing the city.
         </div>
 
         <div class="coast-scroll">
@@ -510,12 +514,12 @@
           <div>
             <p class="kicker">ALONG THE COAST</p>
             <h2 style="font-size:26px;">Moving between the beaches themselves</h2>
-            <p>Once you're on the coast, every beach in this guide sits on (or just off) one road — the A2, Galle Road. Local buses run the whole line every 15–20 minutes, no booking or timetable needed: just wait at any stop and flag one down.</p>
+            <p>Once you're on the coast, every beach in this guide sits on (or just off) one road — the A2, Galle Road. Local buses run the whole line every 15–20 minutes, no booking needed.</p>
           </div>
         </div>
 
         <div class="coast-note">
-          <strong>How it works:</strong> buses signed for Matara, Tangalle or Kataragama run the length of this route and will drop you at any beach along it — tell the conductor your stop as you board. Fares are paid on board in cash and are only a few hundred rupees even for a long hop. Unawatuna and Hiriketiya sit just off the main road, so get off at the nearest junction and take a short tuk-tuk the rest of the way.
+          <strong>How it works:</strong> buses signed for Matara, Tangalle or Kataragama run the length of this route and will drop you at any beach along it. Unawatuna and Hiriketiya sit just off the main road, so get off at the junction and take a short tuk-tuk.
         </div>
 
         <div class="coast-scroll">
@@ -524,7 +528,7 @@
             <tbody id="coastBody"></tbody>
           </table>
         </div>
-        <p style="font-size:12.5px; color:var(--ink-soft); margin-top:10px;">End to end, Hikkaduwa to Tangalle is about 95 km — roughly 3–3.5 hours by bus if you rode it in one sitting, which is why most people break the coast up into a few beach stops rather than travelling straight through.</p>
+        <p style="font-size:12.5px; color:var(--ink-soft); margin-top:10px;">End to end, Hikkaduwa to Tangalle is about 95 km — roughly 3–3.5 hours by bus in one sitting.</p>
       </div>
     </div>
 
@@ -537,7 +541,7 @@
       <div>
         <p class="kicker">03 — WHERE TO STAY</p>
         <h2>Sea-facing villas and apartments</h2>
-        <p>A starting shortlist by area — each links through to a live search so you can check current dates and prices rather than a fixed listing.</p>
+        <p>A starting shortlist by area — each links through to a live search so you can check current dates and prices.</p>
       </div>
     </div>
     <div class="stay-grid" id="stayGrid"></div>
@@ -551,46 +555,76 @@
 </footer>
 
 <script>
+// ---------- DATA ARRAYS ---------- //
 const beaches = [
-  {name:"Mirissa", area:"Matara District", tags:["Whale watching","Nightlife","Swimming"], time:"Dec – Mar", desc:"The south coast's best-known bay — golden sand, a lively strip of beach bars, and the main departure point for whale-watching boats.", hue:["#0E3B36","#1C5C52"], scene:"whale"},
-  {name:"Hiriketiya", area:"Near Dickwella", tags:["Surfing","Yoga","Trendy"], time:"Nov – Apr", desc:"A tight horseshoe bay that went from secret surf spot to the south coast's hottest address, without losing its laid-back, barefoot feel.", hue:["#155850","#4F7A5B"], scene:"surf"},
-  {name:"Tangalle", area:"Southern tip", tags:["Quiet","Long walks","Romantic"], time:"Dec – Mar", desc:"Long, near-empty stretches of sand between small fishing villages — the pick for anyone after peace over parties.", hue:["#0E3B36","#3B5650"], scene:"walk"},
-  {name:"Unawatuna", area:"Near Galle Fort", tags:["Snorkelling","Easy access","Family"], time:"Dec – Mar", desc:"A reef-protected horseshoe bay 15 minutes from Galle Fort, with calm turquoise water and the most restaurants within walking distance.", hue:["#1C5C52","#4F7A5B"], scene:"reef"},
-  {name:"Dikwella", area:"Next to Hiriketiya", tags:["Calm","Clifftop views","Uncrowded"], time:"Dec – Mar", desc:"A long, quieter sister beach to Hiriketiya, with clifftop villas looking out over swaying palms and open ocean.", hue:["#0E3B36","#155850"], scene:"cliff"},
-  {name:"Weligama", area:"West of Mirissa", tags:["Learn to surf","Wide bay","Cafés"], time:"Nov – Apr", desc:"A wide, gentle bay that's the easiest place on the coast to learn to surf, backed by a growing run of cafés and surf schools.", hue:["#155850","#0E3B36"], scene:"learn"},
-  {name:"Koggala", area:"Near Galle", tags:["Boutique hotels","Space","Lake nearby"], time:"Dec – Mar", desc:"Nearly a kilometre of open sand with some of the coast's best boutique beach hotels, plus Koggala Lake just inland.", hue:["#4F7A5B","#1C5C52"], scene:"cabana"},
-  {name:"Hikkaduwa", area:"North of Galle", tags:["Coral reef","Bars","Young crowd"], time:"Nov – Apr", desc:"An upbeat strip of hotels, bars and dive shops, with a protected coral reef just offshore for snorkelling straight from the sand.", hue:["#0E3B36","#E1613C"], scene:"coral"},
+  {name:"Mirissa", image:"images/mirissa.jpg", area:"Matara District", tags:["Whale watching","Nightlife","Swimming"], time:"Dec – Mar", desc:"The south coast's best-known bay — golden sand, a lively strip of beach bars, and the main departure point for whale-watching boats."},
+  {name:"Hiriketiya", image:"images/hiriketiya.jpg", area:"Near Dickwella", tags:["Surfing","Yoga","Trendy"], time:"Nov – Apr", desc:"A tight horseshoe bay that went from secret surf spot to the south coast's hottest address, without losing its laid-back feel."},
+  {name:"Tangalle", image:"images/tangalle.jpg", area:"Southern tip", tags:["Quiet","Long walks","Romantic"], time:"Dec – Mar", desc:"Long, near-empty stretches of sand between small fishing villages — the pick for anyone after peace over parties."},
+  {name:"Unawatuna", image:"images/unawatuna.jpg", area:"Near Galle Fort", tags:["Snorkelling","Easy access","Family"], time:"Dec – Mar", desc:"A reef-protected horseshoe bay 15 minutes from Galle Fort, with calm turquoise water and restaurants within walking distance."},
+  {name:"Dikwella", image:"images/dikwella.jpg", area:"Next to Hiriketiya", tags:["Calm","Clifftop views","Uncrowded"], time:"Dec – Mar", desc:"A long, quieter sister beach to Hiriketiya, with clifftop villas looking out over swaying palms and open ocean."},
+  {name:"Weligama", image:"images/weligama.jpg", area:"West of Mirissa", tags:["Learn to surf","Wide bay","Cafés"], time:"Nov – Apr", desc:"A wide, gentle bay that's the easiest place on the coast to learn to surf, backed by a growing run of cafés and surf schools."},
+  {name:"Koggala", image:"images/koggala.jpg", area:"Near Galle", tags:["Boutique hotels","Space","Lake nearby"], time:"Dec – Mar", desc:"Nearly a kilometre of open sand with some of the coast's best boutique beach hotels, plus Koggala Lake just inland."},
+  {name:"Hikkaduwa", image:"images/hikkaduwa.jpg", area:"North of Galle", tags:["Coral reef","Bars","Young crowd"], time:"Nov – Apr", desc:"An upbeat strip of hotels, bars and dive shops, with a protected coral reef just offshore for snorkelling straight from the sand."}
+];
+
+const viewpoints = [
+  {name:"Coconut Tree Hill", image:"images/coconut-tree-hill.jpg", area:"Mirissa", tags:["Sunset","Photo spot","Easy walk"], time:"Sunset", desc:"A grove of tall palms leaning over red-earth cliffs at the eastern end of Mirissa beach — best visited at golden hour."},
+  {name:"Parrot Rock", image:"images/parrot-rock.jpg", area:"Mirissa", tags:["Panoramas","Low tide","Climb"], time:"Low Tide", desc:"A small tidal island in the middle of Mirissa bay offering 360-degree views across the whole curve of the beach."},
+  {name:"Secret Beach Viewpoint", image:"images/secret-beach.jpg", area:"Mirissa", tags:["Hidden","Tucked away","Snorkel"], time:"Morning", desc:"Tucked around the headland from Mirissa harbour, offering small secluded coves frame by dramatic boulders."},
+  {name:"Frog Rock (Dalawella)", image:"images/dalawella-frog-rock.jpg", area:"Dalawella", tags:["Iconic","Swings","Lagoon"], time:"Sunset", desc:"A giant frog-shaped rock overlooking a calm swimming lagoon, famous for iconic south-coast sunset photos."},
+  {name:"Dondra Head Lighthouse", image:"images/dondra-lighthouse.jpg", area:"Dondra", tags:["Southernmost tip","Historic","Views"], time:"Anytime", desc:"Sri Lanka's southernmost point, featuring an octave-high white lighthouse surrounded by crashing ocean waves."},
+  {name:"Hummanaya Blowhole", image:"images/hummanaya-blowhole.jpg", area:"Kudawella", tags:["Natural wonder","Ocean spray"], time:"High Tide", desc:"The second-largest natural blowhole in the world, blasting sea spray high into the air through a narrow cliff fissure."},
+  {name:"Hiriketiya Headland", image:"images/hiriketiya-headland.jpg", area:"Hiriketiya", tags:["Surfers","Cliff view"], time:"Sunset", desc:"Clifftop view directly over the horseshoe break — ideal for watching surfers catch waves as dusk settles."},
+  {name:"Taprobane Viewpoint", image:"images/taprobane-viewpoint.jpg", area:"Weligama", tags:["Island view","Coastal walk"], time:"Sunset", desc:"Overlooking Sri Lanka's only private island villa, set just 200 meters off the coast of Weligama Bay."},
+  {name:"Koggala Stilt Fishermen", image:"images/koggala-stilts.jpg", area:"Koggala", tags:["Culture","Photographic"], time:"Early morning", desc:"The iconic coastal spot to watch local traditional fishermen perched above the breaking shoreline reefs."},
+  {name:"Dewata Sunset Point", image:"images/dewata-point.jpg", area:"Galle / Dewata", tags:["Sunset","Long bay"], time:"Sunset", desc:"A wide, elevated coastal curve just south of Galle Fort providing expansive views over the western horizon."}
+];
+
+const kandyData = [
+  {name:"Hikkaduwa", dist:"155 km", car:"3h 30m", bus:"7h 00m", route:"Route 01 + 02"},
+  {name:"Unawatuna", dist:"168 km", car:"3h 45m", bus:"7h 30m", route:"Route 01 + 02"},
+  {name:"Weligama", dist:"185 km", car:"4h 00m", bus:"7h 45m", route:"Route 01 + 02"},
+  {name:"Mirissa", dist:"190 km", car:"4h 05m", bus:"8h 00m", route:"Route 01 + 02"},
+  {name:"Dikwella / Hiriketiya", dist:"210 km", car:"4h 20m", bus:"8h 30m", route:"Route 01 + 32"},
+  {name:"Tangalle", dist:"225 km", car:"4h 30m", bus:"8h 45m", route:"Route 01 + 32"}
+];
+
+const coastData = [
+  {hop:"Hikkaduwa → Galle / Unawatuna", dist:"20 km", time:"~35 mins", fare:"LKR 150"},
+  {hop:"Unawatuna → Koggala", dist:"12 km", time:"~20 mins", fare:"LKR 100"},
+  {hop:"Koggala → Weligama", dist:"14 km", time:"~25 mins", fare:"LKR 120"},
+  {hop:"Weligama → Mirissa", dist:"8 km", time:"~15 mins", fare:"LKR 80"},
+  {hop:"Mirissa → Matara", dist:"12 km", time:"~20 mins", fare:"LKR 100"},
+  {hop:"Matara → Dikwella / Hiriketiya", dist:"22 km", time:"~40 mins", fare:"LKR 180"},
+  {hop:"Dikwella → Tangalle", dist:"16 km", time:"~30 mins", fare:"LKR 140"}
 ];
 
 const stayAreas = [
-  {name:"Mirissa & Weligama", places:"Cococabana Beach House, O2 Villas", desc:"Self-catering beach houses and small luxury villas in quiet coves either side of Mirissa's main bay, most a short walk or tuk-tuk from the harbour.", url:"https://www.airbnb.com/mirissa-sri-lanka/stays/beachfront"},
-  {name:"Hiriketiya", places:"Sudu Villa, Hiriketiya surf-bay villas", desc:"Rooftop ocean-view apartments and pool villas a few minutes' walk from the horseshoe bay — the pick for surfers who want a short board-carry to the water.", url:"https://www.airbnb.com/hiriketiya-beach-sri-lanka/stays/beachfront"},
-  {name:"Tangalle & Dickwella", places:"Villa Abiman, La Brisa by Harry", desc:"Fully staffed, multi-bedroom beachfront houses on quieter stretches of coastline — several sit on turtle-nesting beaches, so ask about that before booking.", url:"https://www.airbnb.com/tangalle-beach-sri-lanka/stays/beachfront"},
-  {name:"Matara District", places:"Boutique villas near Polhena & Nilwella", desc:"A mix of small design-led villas and larger family houses a short drive from Matara town, generally better value than Mirissa for the same sea view.", url:"https://www.airbnb.com/matara-sri-lanka/stays/beachfront"},
+  {name:"Mirissa & Weligama", places:"Cococabana Beach House, O2 Villas", desc:"Self-catering beach houses and small luxury villas in quiet coves either side of Mirissa's main bay.", url:"https://www.airbnb.com/mirissa-sri-lanka/stays/beachfront"},
+  {name:"Hiriketiya", places:"Sudu Villa, Hiriketiya surf-bay villas", desc:"Rooftop ocean-view apartments and pool villas a few minutes' walk from the horseshoe bay.", url:"https://www.airbnb.com/hiriketiya-beach-sri-lanka/stays/beachfront"},
+  {name:"Tangalle & Dickwella", places:"Villa Abiman, La Brisa by Harry", desc:"Fully staffed, multi-bedroom beachfront houses on quieter stretches of coastline.", url:"https://www.airbnb.com/tangalle-beach-sri-lanka/stays/beachfront"},
+  {name:"Matara District", places:"Boutique villas near Polhena & Nilwella", desc:"A mix of small design-led villas and larger family houses a short drive from Matara town.", url:"https://www.airbnb.com/matara-sri-lanka/stays/beachfront"}
 ];
 
-function beachArt(hue){
-  return `<svg viewBox="0 0 300 120" preserveAspectRatio="none">
-    <defs><linearGradient id="g${hue[0].slice(1)}" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="${hue[0]}"/><stop offset="100%" stop-color="${hue[1]}"/>
-    </linearGradient></defs>
-    <rect width="300" height="120" fill="url(#g${hue[0].slice(1)})"/>
-    <path d="M0 78 Q 40 60 80 78 T 160 78 T 240 78 T 320 78 V120 H0 Z" fill="#F4ECD8" fill-opacity="0.14"/>
-    <path d="M0 92 Q 50 74 100 92 T 200 92 T 300 92 V120 H0 Z" fill="#F4ECD8" fill-opacity="0.22"/>
-    <circle cx="252" cy="26" r="14" fill="#F4ECD8" fill-opacity="0.85"/>
-  </svg>`;
-}
-
+// ---------- HELPER FUNCTIONS ---------- //
 function mapsSearchUrl(place){
   return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(place + ", Sri Lanka");
 }
 
+function mapsDirUrl(origin, dest){
+  return "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent(origin + ", Sri Lanka") + "&destination=" + encodeURIComponent(dest + ", Sri Lanka");
+}
+
+// ---------- DOM RENDERING ---------- //
+// 1. Render Beaches Grid
 const grid = document.getElementById("beachGrid");
 beaches.forEach((b) => {
   const card = document.createElement("div");
   card.className = "beach-card";
   card.innerHTML = `
-    <div class="beach-art">${beachArt(b.hue)}</div>
+    <div class="beach-art">
+      <img src="${b.image}" alt="${b.name}" loading="lazy">
+    </div>
     <div class="beach-body">
       <h3>${b.name}</h3>
       <div class="tag-row">${b.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
@@ -606,25 +640,15 @@ beaches.forEach((b) => {
   grid.appendChild(card);
 });
 
-const viewpoints = [
-  {name:"Coconut Tree Hill", area:"Mirissa", tags:["Sunset","Photo spot","Easy walk"], time:"Sunset", desc:"A grove of tall palms leaning over red-earth cliffs at the eastern end of Mirissa beach — the single most photographed sunset spot on this coast.", hue:["#155850","#4F7A5B"]},
-  {name:"Parrot Rock", area:"Mirissa", tags:["Tidal island","360° view","Sunrise"], time:"Low tide / sunrise", desc:"A rock island just off Mirissa's main beach, reachable on foot at low tide — climb up for a 360° view of the whole bay before the crowds arrive.", hue:["#0E3B36","#1C5C52"]},
-  {name:"Dalawella Rope Swing & Wijaya Rock", area:"Unawatuna", tags:["Rope swing","Turtles","Sunset"], time:"Sunset", desc:"Swing out over the waves on the famous coconut-tree rope swing, then climb the rock next door for a silhouette shot — wild turtles often swim just offshore.", hue:["#1C5C52","#4F7A5B"]},
-  {name:"Japanese Peace Pagoda, Rumassala", area:"Unawatuna", tags:["Hilltop","Panoramic","Short hike"], time:"Sunset", desc:"A short uphill walk to a hilltop stupa with the best panoramic view on this stretch of coast, looking out over Unawatuna Bay toward Galle.", hue:["#0E3B36","#155850"]},
-  {name:"Flag Rock, Galle Fort", area:"Galle", tags:["Free","Historic","Always open"], time:"Sunset", desc:"The southern bastion of the old Dutch fort ramparts — free, open all day, and the classic spot in Galle to watch the sun drop into the Indian Ocean.", hue:["#0E3B36","#3B5650"]},
-  {name:"Weligama Bay Viewpoint", area:"Weligama", tags:["Wide bay","Cliffside cafés","Surf watching"], time:"Late afternoon", desc:"Cliffside cafés above the bay look out over Taprobane's private island and the long curve of Weligama, with learner surfers dotting the water below.", hue:["#155850","#0E3B36"]},
-  {name:"Hiriketiya Headland", area:"Hiriketiya", tags:["Surf views","Cliff walk","Golden hour"], time:"Golden hour", desc:"The headland on the western side of the bay looks straight down onto the horseshoe-shaped surf break — especially good in the last hour of light.", hue:["#4F7A5B","#1C5C52"]},
-  {name:"Hummanaya Blowhole Cliff", area:"Dikwella", tags:["Dramatic","Sea spray","Quick stop"], time:"Any time, best mid-tide", desc:"The clifftop above the world's second-largest blowhole — sea water sometimes shoots 15 metres into the air through a fissure in the rock.", hue:["#0E3B36","#155850"]},
-  {name:"Goyambokka Viewpoint", area:"Tangalle", tags:["Quiet","Coves","Sunset"], time:"Sunset", desc:"A low headland between two of Tangalle's quietest coves, with an uninterrupted view down the coastline and far fewer people than the Mirissa spots.", hue:["#0E3B36","#4F7A5B"]},
-  {name:"Dondra Head Lighthouse", area:"Near Matara", tags:["Southernmost point","Tallest lighthouse","Dramatic"], time:"Midday or sunset", desc:"Sri Lanka's tallest lighthouse, marking the island's southernmost point, with open ocean on three sides and nothing between you and Antarctica.", hue:["#155850","#4F7A5B"]},
-];
-
+// 2. Render Viewpoints Grid
 const viewGrid = document.getElementById("viewGrid");
 viewpoints.forEach((v) => {
   const card = document.createElement("div");
   card.className = "beach-card";
   card.innerHTML = `
-    <div class="beach-art">${beachArt(v.hue)}</div>
+    <div class="beach-art">
+      <img src="${v.image}" alt="${v.name}" loading="lazy">
+    </div>
     <div class="beach-body">
       <h3>${v.name}</h3>
       <div class="tag-row">${v.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
@@ -640,103 +664,78 @@ viewpoints.forEach((v) => {
   viewGrid.appendChild(card);
 });
 
-const stayGrid = document.getElementById("stayGrid");
-stayAreas.forEach(s => {
-  const card = document.createElement("div");
-  card.className = "stay-card";
-  card.innerHTML = `
-    <div class="stay-loc">${s.name.toUpperCase()}</div>
-    <h3>${s.places}</h3>
-    <p>${s.desc}</p>
-    <a class="explore" href="${s.url}" target="_blank" rel="noopener">See current stays &amp; prices →</a>`;
-  stayGrid.appendChild(card);
-});
-
+// 3. Render Route Planner Dropdown & Action
 const destSelect = document.getElementById("destSelect");
-beaches.forEach(b => {
+const directionsBtn = document.getElementById("directionsBtn");
+
+beaches.forEach((b) => {
   const opt = document.createElement("option");
-  opt.value = b.name + " Beach, Sri Lanka";
+  opt.value = b.name;
   opt.textContent = `${b.name} (${b.area})`;
   destSelect.appendChild(opt);
 });
+
 function updateDirections(){
-  const dest = encodeURIComponent(destSelect.value);
-  document.getElementById("directionsBtn").href =
-    "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent("Kandy, Sri Lanka") +
-    "&destination=" + dest + "&travelmode=driving";
+  directionsBtn.href = mapsDirUrl("Kandy", destSelect.value + " Beach");
 }
 destSelect.addEventListener("change", updateDirections);
-updateDirections();
+updateDirections(); // Initialize link
 
-const kandyHops = [
-  {name:"Hikkaduwa", km:190, car:"~4 hrs", bus:"~7 hrs", route:"01 → 02"},
-  {name:"Unawatuna", km:220, car:"~4h 30m", bus:"~7h 30m", route:"01 → 02"},
-  {name:"Galle", km:215, car:"~4h 20m", bus:"~7h 15m", route:"01 → 02"},
-  {name:"Koggala", km:228, car:"~4h 40m", bus:"~7h 45m", route:"01 → 02"},
-  {name:"Weligama", km:232, car:"~4h 45m", bus:"~7h 45m", route:"01 → 02"},
-  {name:"Mirissa", km:238, car:"~4h 50m", bus:"~8 hrs", route:"01 → 02"},
-  {name:"Matara", km:225, car:"~4h 30m", bus:"~7h 30m", route:"01 → 02"},
-  {name:"Dikwella", km:235, car:"~4h 45m", bus:"~7h 45m", route:"01 → 32"},
-  {name:"Hiriketiya", km:238, car:"~4h 50m", bus:"~7h 50m", route:"01 → 32"},
-  {name:"Tangalle", km:222, car:"~4h 10m", bus:"~8 hrs", route:"01 → 32"},
-];
-
-function kandyDirectionsUrl(place){
-  return "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent("Kandy, Sri Lanka") +
-    "&destination=" + encodeURIComponent(place + " Beach, Sri Lanka") + "&travelmode=driving";
-}
-
+// 4. Render Kandy Direct Table
 const kandyBody = document.getElementById("kandyBody");
-kandyHops.forEach(h => {
+kandyData.forEach((k) => {
   const tr = document.createElement("tr");
   tr.innerHTML = `
-    <td class="hop">Kandy → ${h.name}</td>
-    <td>${h.km} km</td>
-    <td>${h.car}</td>
-    <td>${h.bus}</td>
-    <td class="train-name">${h.route}</td>
-    <td><a class="coast-dir" href="${kandyDirectionsUrl(h.name)}" target="_blank" rel="noopener">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-7.58 7-13A7 7 0 1 0 5 9c0 5.42 7 13 7 13Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg>
-      Directions</a></td>`;
+    <td style="font-weight:600;">${k.name}</td>
+    <td>${k.dist}</td>
+    <td>${k.car}</td>
+    <td>${k.bus}</td>
+    <td>${k.route}</td>
+    <td>
+      <a class="coast-dir" href="${mapsDirUrl("Kandy", k.name+" Beach")}" target="_blank" rel="noopener">
+        Directions →
+      </a>
+    </td>`;
   kandyBody.appendChild(tr);
 });
 
-const coastHops = [
-  {from:"Hikkaduwa", to:"Galle", km:17, time:"35–45 min", fare:"~Rs 50–70", note:""},
-  {from:"Galle", to:"Unawatuna", km:6, time:"~15 min", fare:"~Rs 25–40", note:"Get off at the Unawatuna junction, short tuk-tuk to the bay"},
-  {from:"Unawatuna", to:"Koggala", km:12, time:"20–25 min", fare:"~Rs 40–60", note:""},
-  {from:"Koggala", to:"Weligama", km:8, time:"~15 min", fare:"~Rs 30–45", note:""},
-  {from:"Weligama", to:"Mirissa", km:5, time:"~10 min", fare:"~Rs 20–30", note:""},
-  {from:"Mirissa", to:"Matara", km:10, time:"~20 min", fare:"~Rs 35–50", note:""},
-  {from:"Matara", to:"Dickwella", km:24, time:"40–50 min", fare:"~Rs 70–100", note:"Nearest main-road stop for Hiriketiya — short tuk-tuk from here"},
-  {from:"Dickwella", to:"Tangalle", km:10, time:"~20 min", fare:"~Rs 35–50", note:""},
-];
-
-function coastDirectionsUrl(from, to){
-  return "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent(from + " Beach, Sri Lanka") +
-    "&destination=" + encodeURIComponent(to + " Beach, Sri Lanka") + "&travelmode=driving";
-}
-
+// 5. Render Local Coastal Hops Table
 const coastBody = document.getElementById("coastBody");
-coastHops.forEach(h => {
+coastData.forEach((c) => {
   const tr = document.createElement("tr");
   tr.innerHTML = `
-    <td class="hop">${h.from} → ${h.to}${h.note ? `<br><span class="offroad">${h.note}</span>` : ""}</td>
-    <td>${h.km} km</td>
-    <td>${h.time}</td>
-    <td>${h.fare}</td>
-    <td><a class="coast-dir" href="${coastDirectionsUrl(h.from, h.to)}" target="_blank" rel="noopener">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-7.58 7-13A7 7 0 1 0 5 9c0 5.42 7 13 7 13Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg>
-      Directions</a></td>`;
+    <td class="hop">${c.hop}</td>
+    <td>${c.dist}</td>
+    <td>${c.time}</td>
+    <td>${c.fare}</td>
+    <td>
+      <a class="coast-dir" href="${mapsSearchUrl(c.hop.split('→')[0].trim())}" target="_blank" rel="noopener">
+        View stop →
+      </a>
+    </td>`;
   coastBody.appendChild(tr);
 });
 
-document.getElementById("navToggle").addEventListener("click", () => {
-  document.getElementById("navLinks").classList.toggle("open");
+// 6. Render Stays Grid
+const stayGrid = document.getElementById("stayGrid");
+stayAreas.forEach((s) => {
+  const card = document.createElement("div");
+  card.className = "stay-card";
+  card.innerHTML = `
+    <h3>${s.name}</h3>
+    <span class="stay-loc">${s.places}</span>
+    <p>${s.desc}</p>
+    <a href="${s.url}" target="_blank" rel="noopener" class="explore">Explore options in ${s.name} →</a>`;
+  stayGrid.appendChild(card);
 });
-document.querySelectorAll("nav.links a").forEach(a => a.addEventListener("click", () => {
-  document.getElementById("navLinks").classList.remove("open");
-}));
+
+// 7. Nav Toggle for Mobile
+const navToggle = document.getElementById("navToggle");
+const navLinks = document.getElementById("navLinks");
+navToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("open");
+});
 </script>
+
 </body>
 </html>
