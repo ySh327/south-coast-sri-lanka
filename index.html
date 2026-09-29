@@ -172,6 +172,10 @@
     overflow:hidden;
   }
   .beach-art svg{width:100%; height:100%; display:block;}
+  .beach-art img{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; display:block;
+  }
   .beach-body{padding:20px 20px 22px; display:flex; flex-direction:column; gap:10px; flex:1;}
   .beach-body h3{font-family:var(--font-head); font-size:22px; margin:0; font-weight:600;}
   .tag-row{display:flex; gap:6px; flex-wrap:wrap;}
@@ -585,12 +589,16 @@ function mapsSearchUrl(place){
   return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(place + ", Sri Lanka");
 }
 
+function slug(name){
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
 const grid = document.getElementById("beachGrid");
 beaches.forEach((b) => {
   const card = document.createElement("div");
   card.className = "beach-card";
   card.innerHTML = `
-    <div class="beach-art">${beachArt(b.hue)}</div>
+    <div class="beach-art">${beachArt(b.hue)}<img src="images/${slug(b.name)}.jpg" alt="${b.name}" loading="lazy" onerror="this.remove()"></div>
     <div class="beach-body">
       <h3>${b.name}</h3>
       <div class="tag-row">${b.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
@@ -624,7 +632,7 @@ viewpoints.forEach((v) => {
   const card = document.createElement("div");
   card.className = "beach-card";
   card.innerHTML = `
-    <div class="beach-art">${beachArt(v.hue)}</div>
+    <div class="beach-art">${beachArt(v.hue)}<img src="images/${slug(v.name)}.jpg" alt="${v.name}" loading="lazy" onerror="this.remove()"></div>
     <div class="beach-body">
       <h3>${v.name}</h3>
       <div class="tag-row">${v.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
